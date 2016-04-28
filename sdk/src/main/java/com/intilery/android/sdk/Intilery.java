@@ -4,9 +4,6 @@ import android.os.Bundle;
 
 import com.intilery.android.sdk.io.HTTPManager;
 import com.intilery.android.sdk.io.IntileryIO;
-import com.intilery.android.sdk.obj.PropertyUpdate;
-
-import java.util.HashMap;
 
 import lombok.Getter;
 
@@ -22,6 +19,8 @@ public class Intilery {
     private final IntileryConfig config;
     @Getter
     private final IntileryIO io;
+    @Getter
+    private final IntileryQuickCall quickCall;
 
     @Getter
     private final IntileryUserInfo userInfo;
@@ -36,10 +35,7 @@ public class Intilery {
         if (getConfig().getUrl().charAt(getConfig().getUrl().length() - 1) == '/') throw new AssertionError("URL ends with a slash!");
         io = new HTTPManager();
         userInfo = new IntileryUserInfo(getConfig().getRootContext());
-    }
-
-    public void gcmHook(String thing, Bundle bundle) {
-        throw new UnsupportedOperationException("GCM Hook isn't yet implemented, track your own event for now!");
+        quickCall = new IntileryQuickCall();
     }
 
 }
